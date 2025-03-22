@@ -19,7 +19,7 @@ def parse_args():
                         help='height of the board')
     parser.add_argument('--n_mines', type=int, default=10,
                         help='Number of mines on the board')
-    parser.add_argument('--episodes', type=int, default=100,
+    parser.add_argument('--episodes', type=int, default=1000,
                         help='Number of episodes to test on')
     parser.add_argument('--model_path', type=str, default='models/Our Model.h5',
                         help='Path to trained model')
@@ -139,7 +139,7 @@ def main():
             current_state = env.num_state(env.state)
             
             # Get action from model
-            action = get_action(model, current_state, env, epsilon=0.05)
+            action = get_action(model, current_state, env, epsilon=0.00)
             
             # Take action
             new_state, reward, done = env.step(action)
@@ -171,12 +171,6 @@ def main():
     print(f"Wins: {wins}")
     print(f"Losses: {losses}")
     print(f"Win rate: {win_rate:.2%}")
-    print(f"Average reveals per win: {avg_reveals_per_win:.2f}")
     
-    # Compare to random play baseline
-    random_win_rate = 0.05  # Approximate win rate for random play
-    print(f"\nRandom baseline win rate: {random_win_rate:.2%}")
-    print(f"Performance vs random: {win_rate/random_win_rate:.2f}x better")
-
 if __name__ == "__main__":
     main()
