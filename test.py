@@ -163,7 +163,6 @@ def main():
     
     # Calculate final stats
     win_rate = wins / args.episodes
-    avg_reveals_per_win = np.mean(avg_reveals) if avg_reveals else 0
     
     # Print results
     print("\n===== Test Results =====")
